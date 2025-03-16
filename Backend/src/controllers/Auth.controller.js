@@ -3,6 +3,7 @@ import { CatchAsyncError } from "../Middlewares/CatchAsyncError.js";
 import ErrorHandler from "../Middlewares/ErrorMiddleware.js";
 import User from "../Models/user.model.js";
 import { generateToken } from "../utils/jwt.js";
+import cloudinary from "../cloudinary/Cloudinary.js";
 
 export const Login = CatchAsyncError(async (req, res, next) => {
   const { email, password } = req.body;
@@ -56,10 +57,16 @@ export const SignUp = CatchAsyncError(async (req, res, next) => {
   });
 });
 
-export const UpdateProfile = CatchAsyncError((res, req, next) => {
+export const UpdateProfile = CatchAsyncError(async (res, req, next) => {
   const { profilePic } = req.body;
   if (!profilePic)
     return next(new ErrorHandler("ProfilePic is required!", 401));
+  const uploadResponse = await cloudinary.uploader.upload(profilePic);
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user._id,
+    { profilePic: uploadResponse.secure_url },
+    { new: true }
+  );
 });
 
 export const CheckAuth = CatchAsyncError((req, res, next) => {
