@@ -1,4 +1,4 @@
-import { HttpStatusCode } from "axios";
+import { HttpStatusCode } from "http";
 import { CatchAsyncError } from "../Middlewares/CatchAsyncError.js";
 import ErrorHandler from "../Middlewares/ErrorMiddleware.js";
 import User from "../Models/user.model.js";
