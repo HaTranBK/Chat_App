@@ -3,10 +3,10 @@ import dotenv from "dotenv";
 import root from "./routes/root.route.js";
 import cors from "cors";
 import { dbConnect } from "./dataBase/db.js";
-import { errorMiddleWare } from "./Middlewares/ErrorMiddleware.js";
 import cookieParser from "cookie-parser";
 import { app, server } from "./lib/socket.js";
 import path from "path";
+import { errorMiddleWare } from "./Middlewares/ErrorMiddleware.js";
 dotenv.config({ path: "./../Backend/config/.env" });
 
 const __dirname = path.resolve();
