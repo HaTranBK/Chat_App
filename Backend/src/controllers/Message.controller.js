@@ -4,6 +4,7 @@ import ErrorHandler from "../Middlewares/ErrorMiddleware.js";
 import Message from "../Models/message.model.js";
 import User from "../Models/user.model.js";
 import cloudinary from "../cloudinary/Cloudinary.js";
+import getReceiverSocketId, { io } from "../lib/socket.js";
 
 export const GetUserForSidebar = CatchAsyncError(async (req, res, next) => {
   const loggedInUserId = req.user._id;
@@ -44,6 +45,10 @@ export const SendMessage = CatchAsyncError(async (req, res, next) => {
     text,
     image: imageURL,
   });
+
+  const recSocketId = getReceiverSocketId(receiverId);
+  console.log("recSocketId: ", recSocketId);
+  if (recSocketId) io.to(recSocketId).emit("newMessage", newMessage);
 
   res.status(200).json(newMessage);
 });

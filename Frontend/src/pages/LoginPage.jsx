@@ -11,7 +11,13 @@ import { axiosInstance } from "../lib/axios.js";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { handleNotification } = useContext(NotificationContext);
-  const { setAuthUser, isSigningIn } = useAuthStore();
+  const {
+    setAuthUser,
+    isLoggingIn,
+    setIsSigningInOff,
+    setIsSigningInOn,
+    connectSocket,
+  } = useAuthStore();
   const navigate = useNavigate();
   const { values, errors, handleChange, handleBlur, handleSubmit, touched } =
     useFormik({
@@ -21,17 +27,21 @@ const Login = () => {
       },
       onSubmit: async (values) => {
         console.log("values in useformik: ", values);
+        setIsSigningInOn();
         try {
           const result = await axiosInstance.post("/auth/login", values);
           console.log("result in signIn useformik: ", result);
           handleNotification(result.data.message, "success");
-          setAuthUser();
+          setAuthUser(result.data.user);
+          connectSocket();
           setTimeout(() => {
             navigate("/");
           }, 2000);
         } catch (error) {
           console.log("error in signin in useformik: ", error);
           handleNotification(error.response.data.message, "error");
+        } finally {
+          setIsSigningInOff();
         }
       },
       validationSchema: yup.object({
@@ -95,9 +105,9 @@ const Login = () => {
                     type="submit"
                     className="btn btn-primary w-full"
                     onClick={handleSubmit}
-                    disabled={isSigningIn}
+                    disabled={isLoggingIn}
                   >
-                    {isSigningIn ? (
+                    {isLoggingIn ? (
                       <>
                         <Loader2 className="size-5 animate-spin"></Loader2>
                       </>

@@ -57,7 +57,8 @@ export const SignUp = CatchAsyncError(async (req, res, next) => {
   });
 });
 
-export const UpdateProfile = CatchAsyncError(async (res, req, next) => {
+export const UpdateProfile = CatchAsyncError(async (req, res, next) => {
+  console.log("req.body trong updateprofile: ", req.body);
   const { profilePic } = req.body;
   if (!profilePic)
     return next(new ErrorHandler("ProfilePic is required!", 401));
@@ -67,6 +68,7 @@ export const UpdateProfile = CatchAsyncError(async (res, req, next) => {
     { profilePic: uploadResponse.secure_url },
     { new: true }
   );
+  res.status(200).json(updatedUser);
 });
 
 export const CheckAuth = CatchAsyncError((req, res, next) => {

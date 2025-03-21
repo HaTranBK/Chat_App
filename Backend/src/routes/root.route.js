@@ -5,5 +5,5 @@ import { MessageRoute } from "./message.route.js";
 const root = Router();
 
 root.use("/api/auth", AuthRoute);
-root.use("/api/message", MessageRoute);
+root.use("/api/messages", MessageRoute);
 export default root;

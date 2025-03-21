@@ -4,12 +4,12 @@ import LoginPage from "../pages/LoginPage.jsx";
 import SignUpPage from "../pages/SignUpPage.jsx";
 import SettingPage from "../pages/SettingPage.jsx";
 import ProfilePage from "../pages/ProfilePage.jsx";
-import { useAuthStore } from "../store/useAuthStore.js";
 import { useEffect } from "react";
+import { useAuthStore } from "../store/useAuthStore.js";
 
-const customRoute = () => {
-  const { authUser, checkAuth } = useAuthStore();
+const CustomRoute = () => {
   console.log("out of useEffect");
+  const { checkAuth, authUser } = useAuthStore();
   useEffect(() => {
     console.log("in useEffect");
     checkAuth();
@@ -29,7 +29,7 @@ const customRoute = () => {
       element: !authUser ? <SignUpPage /> : <Navigate to="/" />,
     },
     {
-      path: "/setting",
+      path: "/settings",
       element: <SettingPage />,
     },
     {
@@ -40,4 +40,4 @@ const customRoute = () => {
   return route;
 };
 
-export default customRoute;
+export default CustomRoute;

@@ -12,4 +12,5 @@ route.get("/users", isUserAuthenticated, GetUserForSidebar);
 route.get("/:id", isUserAuthenticated, GetMessage);
 
 route.post("/send/:id", isUserAuthenticated, SendMessage);
+
 export const MessageRoute = route;

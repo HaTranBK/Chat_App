@@ -15,7 +15,7 @@ const route = Router();
 route.post("/login", validateSignIn, Login);
 route.post("/signup", validateSignUp, SignUp);
 route.post("/logout", Logout);
-route.post("/update-profile", isUserAuthenticated, UpdateProfile);
+route.put("/update-profile", isUserAuthenticated, UpdateProfile);
 
 route.get("/check", isUserAuthenticated, CheckAuth);
 export const AuthRoute = route;

@@ -1,8 +1,12 @@
 import { createContext } from "react";
-import customRoute from "./routes/customRoute.jsx";
+import CustomRoute from "./routes/CustomRoute.jsx";
 import { toast, ToastContainer } from "react-toastify";
+import { useThemeStore } from "./store/useThemeStore.js";
+import Navbar from "./components/Navbar.jsx";
 export const NotificationContext = createContext();
 function App() {
+  const { theme } = useThemeStore();
+
   const handleNotification = (message, type) => {
     return toast[type](message, {
       position: "top-right",
@@ -12,12 +16,14 @@ function App() {
     });
   };
 
-  const routes = customRoute();
   return (
-    <NotificationContext.Provider value={{ handleNotification }}>
-      {routes}
-      <ToastContainer />
-    </NotificationContext.Provider>
+    <div data-theme={theme}>
+      <Navbar />
+      <NotificationContext.Provider value={{ handleNotification }}>
+        <CustomRoute />
+        <ToastContainer />
+      </NotificationContext.Provider>
+    </div>
   );
 }
 

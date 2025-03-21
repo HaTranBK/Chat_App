@@ -5,24 +5,30 @@ import cors from "cors";
 import { dbConnect } from "./dataBase/db.js";
 import { errorMiddleWare } from "./Middlewares/ErrorMiddleware.js";
 import cookieParser from "cookie-parser";
-
+import { app, server } from "./lib/socket.js";
+import path from "path";
 dotenv.config({ path: "./../Backend/config/.env" });
 
-const app = express();
+const __dirname = path.resolve();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173", "https://app.ohstem.vn/"],
     method: ["POST", "PUT", "DELETE", "GET"],
     credentials: true, //allow cookie be sent with request.
   })
 );
 app.use(cookieParser());
 app.use(root);
-
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../Frontend/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  });
+}
 app.use(errorMiddleWare);
 
-app.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () => {
   console.log(`Server is listening on the PORT ${process.env.PORT}`);
   dbConnect();
 });

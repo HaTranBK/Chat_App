@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema(
     },
     profilePic: {
       type: String,
-      default: true,
+      default: "",
     },
   },
   { timestamps: true }
