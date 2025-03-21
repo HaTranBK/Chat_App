@@ -6,7 +6,7 @@ import { dbConnect } from "./dataBase/db.js";
 import cookieParser from "cookie-parser";
 import { app, server } from "./lib/socket.js";
 import path from "path";
-import { errorMiddleWare } from "./Middlewares/ErrorMiddlewares.js";
+import { errorMiddleWare } from "./Middlewares/ErrorMiddleWare.js";
 dotenv.config({ path: "./../Backend/config/.env" });
 
 const __dirname = path.resolve();

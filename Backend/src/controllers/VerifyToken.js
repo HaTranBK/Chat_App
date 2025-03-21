@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { CatchAsyncError } from "../Middlewares/CatchAsyncError.js";
 import User from "../Models/user.model.js";
-import ErrorHandler from "../Middlewares/ErrorMiddlewares.js";
+import ErrorHandler from "../Middlewares/ErrorMiddleware.js";
 
 export const isUserAuthenticated = CatchAsyncError(async (req, res, next) => {
   console.log("cookie of user: ", req.cookies);

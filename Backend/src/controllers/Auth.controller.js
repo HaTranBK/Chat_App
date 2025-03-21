@@ -1,9 +1,9 @@
 import { HttpStatusCode } from "http";
 import { CatchAsyncError } from "../Middlewares/CatchAsyncError.js";
-import ErrorHandler from "../Middlewares/ErrorMiddleware.js";
 import User from "../Models/user.model.js";
 import { generateToken } from "../utils/jwt.js";
 import cloudinary from "../cloudinary/Cloudinary.js";
+import ErrorHandler from "../Middlewares/ErrorMiddleWare.js";
 
 export const Login = CatchAsyncError(async (req, res, next) => {
   const { email, password } = req.body;

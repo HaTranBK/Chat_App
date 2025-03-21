@@ -4,7 +4,7 @@ import Message from "../Models/message.model.js";
 import User from "../Models/user.model.js";
 import cloudinary from "../cloudinary/Cloudinary.js";
 import getReceiverSocketId, { io } from "../lib/socket.js";
-import ErrorHandler from "../Middlewares/ErrorMiddlewares.js";
+import ErrorHandler from "../Middlewares/ErrorMiddleWare.js";
 
 export const GetUserForSidebar = CatchAsyncError(async (req, res, next) => {
   const loggedInUserId = req.user._id;
