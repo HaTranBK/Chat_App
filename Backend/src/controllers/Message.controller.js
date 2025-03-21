@@ -1,10 +1,10 @@
 import { HttpStatusCode } from "http";
 import { CatchAsyncError } from "../Middlewares/CatchAsyncError.js";
-import ErrorHandler from "../Middlewares/ErrorMiddleware.js";
 import Message from "../Models/message.model.js";
 import User from "../Models/user.model.js";
 import cloudinary from "../cloudinary/Cloudinary.js";
 import getReceiverSocketId, { io } from "../lib/socket.js";
+import ErrorHandler from "../Middlewares/ErrorMiddlewares.js";
 
 export const GetUserForSidebar = CatchAsyncError(async (req, res, next) => {
   const loggedInUserId = req.user._id;
