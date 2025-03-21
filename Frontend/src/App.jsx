@@ -16,11 +16,13 @@ function App() {
     });
   };
 
+  const routes = CustomRoute();
+
   return (
     <div data-theme={theme}>
       <Navbar />
       <NotificationContext.Provider value={{ handleNotification }}>
-        <CustomRoute />
+        {routes}
         <ToastContainer />
       </NotificationContext.Provider>
     </div>
