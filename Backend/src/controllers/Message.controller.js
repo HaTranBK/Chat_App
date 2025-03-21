@@ -1,4 +1,3 @@
-import { HttpStatusCode } from "http";
 import { CatchAsyncError } from "../Middlewares/CatchAsyncError.js";
 import Message from "../Models/message.model.js";
 import User from "../Models/user.model.js";
@@ -27,7 +26,7 @@ export const GetMessage = CatchAsyncError(async (req, res, next) => {
   });
   if (!listMessage)
     return next(new ErrorHandler("Message Not Found with that ID", 404));
-  res.status(HttpStatusCode.Accepted).json(listMessage);
+  res.status(200).json(listMessage);
 });
 
 export const SendMessage = CatchAsyncError(async (req, res, next) => {

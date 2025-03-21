@@ -1,4 +1,3 @@
-import { HttpStatusCode } from "http";
 import { CatchAsyncError } from "../Middlewares/CatchAsyncError.js";
 import User from "../Models/user.model.js";
 import { generateToken } from "../utils/jwt.js";
@@ -15,12 +14,12 @@ export const Login = CatchAsyncError(async (req, res, next) => {
   console.log("result from check password: ", checkPassword);
   if (!checkPassword)
     return next(new ErrorHandler("Password Is Not Correct", 400));
-  generateToken(user, "Login Successfully", HttpStatusCode.Accepted, res);
+  generateToken(user, "Login Successfully", 201, res);
 });
 
 export const Logout = CatchAsyncError((req, res, next) => {
   res
-    .status(HttpStatusCode.Accepted)
+    .status(201)
     .cookie("UserToken", "", {
       httpOnly: true,
       expires: new Date(Date.now()),
