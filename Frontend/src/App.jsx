@@ -1,8 +1,8 @@
 import { createContext } from "react";
-import CustomRoute from "./routes/CustomRoute.jsx";
 import { toast, ToastContainer } from "react-toastify";
 import { useThemeStore } from "./store/useThemeStore.js";
 import Navbar from "./components/Navbar.jsx";
+import CustomRoute from "./routes/CustomeRoute.jsx";
 export const NotificationContext = createContext();
 function App() {
   const { theme } = useThemeStore();
